@@ -201,14 +201,21 @@ app.post('/webhook', async (req, res) => {
 
                       // if(debugging){ whatsappReply(currentContact.number, "your taxon repsonse:"+JSON.stringify(taxonResult.results[0]))}
 
+                     
 
-                        if (typeof taxonObtained.nubKey !== "undefined" && taxonObtained.nubKey !== "") {
+
+                        if ((typeof taxonObtained.nubKey !== "undefined" && taxonObtained.nubKey !== "")|| (typeof taxonObtained.key !== "undefined" && taxonObtained.key !== "")) {
 
                             const taxon_name = result.taxon_name
 
                             delete result.taxon_name
 
+                            if (typeof taxonObtained.nubKey === "undefined" ){
+                                result.key = taxonObtained.key
+                            }else{
+
                             result.taxonKey = taxonObtained.nubKey
+                            }
 
                             const getUrl = buildGetUrl("https://api.gbif.org/v1/occurrence/search?", result);
 
