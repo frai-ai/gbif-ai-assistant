@@ -1,6 +1,6 @@
-# Gibif AI Assistant
+# GBIF AI Assistant
 
-Gibif AI Assistant is an AI-powered tool that leverages Natural Language Processing (NLP) to allow users to query the Global Biodiversity Information Facility (GBIF) API through WhatsApp. By integrating NLP with the popular messaging platform, Gibif AI Assistant offers a simple, conversational way to access detailed biodiversity information.
+GBIF AI Assistant is an AI-powered tool that leverages Natural Language Processing (NLP) to allow users to query the Global Biodiversity Information Facility (GBIF) API through WhatsApp. By integrating NLP with the popular messaging platform, GBIF AI Assistant offers a simple, conversational way to access detailed biodiversity information.
 
 ## Features
 
@@ -13,7 +13,7 @@ Gibif AI Assistant is an AI-powered tool that leverages Natural Language Process
 
 1. **Navigate to the project directory:**
 
-   cd gibif-ai-assistant
+   cd gbif-ai-assistant
 
 2. **Install the dependencies:**
 
@@ -39,7 +39,7 @@ Gibif AI Assistant is an AI-powered tool that leverages Natural Language Process
 
 ## Example Query
 
-When you send a message like "Show me data about African elephants," the Gibif AI Assistant will:
+When you send a message like "Show me data about African elephants," the GBIF AI Assistant will:
 
 - Identify "African elephants" as the taxon of interest.
 - Query the GBIF API for species occurrences and related data.
@@ -56,7 +56,6 @@ When you send a message like "Show me data about African elephants," the Gibif A
 
 - **`app.js`**: The main file containing the Express server setup and logic for handling WhatsApp messages.
 - **`metric.js`**: A module responsible for processing data retrieved from the GBIF API.
-- **`utils.js`**: Contains utility functions for making API calls, handling responses, and more.
 
 ## Contributing
 

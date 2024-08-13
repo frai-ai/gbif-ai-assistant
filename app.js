@@ -136,7 +136,7 @@ app.post('/webhook', async (req, res) => {
                     response_format: {
                         type: "json_schema",
                         json_schema: {
-                            name: "gibif_query",
+                            name: "gbif_query",
                             strict: false,
                             schema: {
                                 type: "object",
@@ -290,7 +290,7 @@ app.post('/webhook', async (req, res) => {
                                     `*Map Occurrences of ${taxon_name}*:`+latlngArray.length+"\nTop 10 locations:\n"+`${locationMapStr}`)
                                   if (Object.keys(results.occurrencesPerMonth).length > 1){
                                     whatsappSendImage(currentContact.number,results.occurrencesPerMonthChartUrl,
-                                        `*Distribution of the published data acroos the year*`)
+                                        `*Distribution of the published data across the year*`)
                                   }
                                   if (Object.keys(results.occurrencesPerYear).length > 1){
                                     whatsappSendImage(currentContact.number,results.occurrencesPerYearChartUrl,
@@ -342,7 +342,9 @@ app.post('/webhook', async (req, res) => {
                     
                             if(debugging){console.log(requestData)}
 
-                            logUserQuestions(currentContact.number, currentContact.getData("initalRequest"))
+                            // log user question
+                            // mask user number before logging
+                            logUserQuestions(currentContact.number.replace(/(\d{4})$/, 'XXXX'), currentContact.getData("initalRequest"))
                         
 
                             openAICall(requestData)
@@ -414,10 +416,10 @@ app.post('/webhook', async (req, res) => {
     res.sendStatus(200);
 });
 
-async function logUserQuestions(user, question) {
+async function logUserQuestions(maskedUser, question) {
 
     // Data to be appended to the file
-    const data = `\n${user}\t${question.replaceAll('\n', ' ').replaceAll('\t', ' ')}`;
+    const data = `\n${maskedUser}\t${question.replaceAll('\n', ' ').replaceAll('\t', ' ')}`;
 
     // Append data to a file asynchronously
     fs.appendFile('user_log.csv', data, 'utf8', (err) => {
