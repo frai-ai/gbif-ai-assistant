@@ -103,7 +103,7 @@ app.post('/webhook', async (req, res) => {
 
         switch (currentContact.step) {
             case 1:
-                whatsappReply(currentContact.number, "Hi, I'm the GBIF AI assistant. I'll help you find insights about data occurrences from www.gbif.org related to a specific taxon. Please feel free to ask me anything related to a scientific name or a common name, and I'll retrieve some interesting metrics about biodiversity data.")
+                whatsappReply(currentContact.number, "Hi! I’m the GBIF AI Assistant. Ask me about scientific or common names, and I’ll provide insights on biodiversity data from www.gbif.org. By continuing, you agree to the terms of use described in https://bit.ly/gbif-ai-tyc")
                 
                 break;
             case 2:
