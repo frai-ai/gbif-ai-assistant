@@ -283,18 +283,18 @@ app.post('/webhook', async (req, res) => {
                                   const locationMapStr = Object.entries(locationMap)
                                     .map(([key, value]) => `- ${key}: ${value}\n`)
                                     .join('');
-                                  
 
+                                  whatsappReply(currentContact.number,`From your request, the total number of records available in GBIF is ${results.totalRecords}. Showing insights from ${results.retrievedRecords} records retrieved`)
 
                                   whatsappSendImage(currentContact.number,url,
                                     `*Map Occurrences of ${taxon_name}*:`+latlngArray.length+"\nTop 10 locations:\n"+`${locationMapStr}`)
                                   if (Object.keys(results.occurrencesPerMonth).length > 1){
                                     whatsappSendImage(currentContact.number,results.occurrencesPerMonthChartUrl,
-                                        `*Distribution of the published data across the year*`)
+                                        `Distribution of the published data across the year`)
                                   }
                                   if (Object.keys(results.occurrencesPerYear).length > 1){
                                     whatsappSendImage(currentContact.number,results.occurrencesPerYearChartUrl,
-                                        `*Yearly count of published data during time*`)
+                                        `Yearly count of published data during time`)
                                   }
                               }
 
@@ -344,7 +344,7 @@ app.post('/webhook', async (req, res) => {
 
                             // log user question
                             // mask user number before logging
-                            logUserQuestions(currentContact.number.replace(/(\d{4})$/, 'XXXX'), currentContact.getData("initalRequest"))
+                            logUserQuestions(currentDate, currentContact.number.replace(/(\d{4})$/, 'XXXX'), currentContact.getData("initalRequest"))
                         
 
                             openAICall(requestData)
@@ -416,10 +416,10 @@ app.post('/webhook', async (req, res) => {
     res.sendStatus(200);
 });
 
-async function logUserQuestions(maskedUser, question) {
+async function logUserQuestions(currentdate, maskedUser, question) {
 
     // Data to be appended to the file
-    const data = `\n${maskedUser}\t${question.replaceAll('\n', ' ').replaceAll('\t', ' ')}`;
+    const data = `${currentdate}\t${maskedUser}\t${question.replaceAll('\n', ' ').replaceAll('\t', ' ')}\n`;
 
     // Append data to a file asynchronously
     fs.appendFile('user_log.csv', data, 'utf8', (err) => {
